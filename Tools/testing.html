@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="constants.js"></script>
+    <script src="domEditor.js"></script>
+    <script src="random.js"></script>
+    <script src="functions.js"></script>
+    <script src="range.js"></script>
+    <script src="trig.js"></script>
+    <script src="canvas.js"></script>
+    <script src="F:\Documents\JS\Mattematikk\Spirograph\spirograph.js"></script>
+</head>
+<body>
+    <div>Scripts loaded in page:</div>
+    <div id="results"></div>
+    <script id="IGNORE"> //Displays all scripts loaded in page
+        let scripts = document.getElementsByTagName("script");
+        let pagelist = document.createElement("ul");
+        for (let script of scripts) {
+            if (script.id != "IGNORE") {
+                let li = document.createElement("li");
+                let text = document.createTextNode(script.src);
+                li.appendChild(text);
+                pagelist.appendChild(li);
+            }
+        }
+        document.getElementById("results").appendChild(pagelist);
+        let testClasses = ["class1", "class2", "class3"];
+        let testId = "testID";
+        let testTextContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus id diam sed faucibus. Suspendisse neque nibh, tincidunt eu massa at, dapibus imperdiet magna. Maecenas a odio convallis, fringilla augue quis, lacinia arcu. Curabitur mollis nunc at eros placerat mattis. Nunc pharetra mauris ut metus ultrices fermentum. Donec felis nulla, placerat a ultrices nec, pharetra eu lacus. Curabitur sagittis neque eu faucibus rutrum. Etiam et luctus ante, sit amet hendrerit lectus. Nunc sit amet bibendum orci. Nulla nec faucibus justo. Donec ullamcorper malesuada scelerisque. Cras tincidunt, mi non lobortis volutpat, purus metus lacinia lectus, sit amet maximus arcu magna non ligula. Phasellus fringilla nunc ac orci vehicula vulputate. Proin commodo nibh in odio cursus, sed pretium justo scelerisque. Vivamus sit amet nisl faucibus, facilisis eros fringilla, venenatis mauris. Duis placerat eros at eros posuere, non tempus lacus luctus.";
+        
+        let page = new Canvas(document.body);
+        page.build();
+
+        let n = 1000;  //Resolution
+        let span = 30*Math.PI;
+        let scale = 30;
+        let offX = 500;
+        let offY = 400;
+        let a = 3.3;
+        let r = 1.5;
+        let R = 2.01;
+        let spiro = new Spirograph(n, span, scale, a, r, R, offX, offY);
+        let arr = spiro.calculateEpicyclic();
+
+        arr = Canvas.translateToVertex(arr);
+        arr.pop();
+        page.polygon(arr);
+        
+        
+    </script>
+</body>
+</html>
