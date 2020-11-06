@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
     <script src="script/enviroment.js"></script>
     <script src="script/person.js"></script>
     <script src="script/virus.js"></script>
+    <div id="reactContainer">
 
+    </div>
     <!-- Controller script (move to file) -->
-    <script>
+    <script type="text/babel">
         let virus = new Virus(); // Virus with default params
         let env = new Enviroment(virus);
+        env.people.forEach(i => Math.random() < 0.1 ? i.infected = true :i.infected = false )
 
         // Do something repeating and call env.oneCycle()
 
@@ -34,7 +40,8 @@
         console.log("infected after %i attempts", tries);
 
 
-        // MoveTest 
+        // MoveTest
+        /*
         let bounds = {x: 50, y:50};
         let closeLeft = new Person(3, 0);
         closeLeft.direction.x = -15;
@@ -51,6 +58,29 @@
         console.log("moving left");
         closeRight.move(bounds);
         console.log("moved to %i ", closeRight.pos.x);
+        */
+
+        
+        class OutputField extends React.Component {
+            constructor(props) {
+                super(props)
+            }
+
+            render() {
+                return (<div>
+                    <h1>Results</h1>
+                    <div>Active people {this.props.enviroment.people.length}</div>
+                    <div>Active infections {this.props.enviroment.people.filter(i => i.infected).length}</div>
+                    </div>
+                );
+            }
+        }
+        
+        function update() {
+            ReactDOM.render(<OutputField enviroment={env}/>, document.getElementById("reactContainer"))
+        }
+
+        update();
 
     </script>
 </body>

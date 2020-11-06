@@ -1,6 +1,6 @@
 class Enviroment {
     time = 0;
-    constructor(virus, boundaries={x: 50, y: 50}, people=10) {
+    constructor(virus, boundaries={x: 500, y: 500}, people=100) {
         this.virus = virus; // Virus object
         this.bounds = boundaries; // Implement check to be sure that given bounds are valid and correctly formatted
         this.people = [...Array(people)].map(i => new Person(Math.floor(Math.random()*boundaries.x), Math.floor(Math.random()*boundaries.y)))
