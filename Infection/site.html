@@ -32,6 +32,26 @@
             }
         }
         console.log("infected after %i attempts", tries);
+
+
+        // MoveTest 
+        let bounds = {x: 50, y:50};
+        let closeLeft = new Person(3, 0);
+        closeLeft.direction.x = -15;
+        let closeRight = new Person(48, 0);
+        closeRight.direction.x = 5;
+
+        console.log("Starting at x: %i with direction: %i", closeLeft.pos.x, closeLeft.direction.x);
+        console.log("moving left");
+        closeLeft.move(bounds);
+        console.log("moved to %i ", closeLeft.pos.x);
+        console.log("\n\n");
+
+        console.log("Starting at x: %i with direction: %i", closeRight.pos.x, closeRight.direction.x);
+        console.log("moving left");
+        closeRight.move(bounds);
+        console.log("moved to %i ", closeRight.pos.x);
+
     </script>
 </body>
 </html>

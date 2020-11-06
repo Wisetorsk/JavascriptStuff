@@ -41,4 +41,33 @@ class Person {
             } 
         }
     }
+
+    move(bounds) {
+        if ((this.pos.x + this.direction.x) < bounds.x && (this.pos.x + this.direction.x) >= 0) { // No walls within x velocity distance
+            this.pos.x += this.direction.x;
+        } else {
+            // Get remaining distance to wall 
+            let remainderToWallX = (this.pos.x + this.direction.x >= bounds.x) ? bounds.x - this.pos.x : -this.pos.x;
+            this.pos.x += remainderToWallX;
+            //console.log("remainder to wall: %i ", remainderToWall)
+            this.direction.x *= -1; // You are now at a wall, change direction
+            let distanceLeftX = this.direction.x + remainderToWallX; // Get remaining distance left on move
+            //console.log("Distance left: %i", distanceLeft)
+            this.pos.x += distanceLeftX;
+        }
+
+        if ((this.pos.y + this.direction.y) < bounds.y && (this.pos.y + this.direction.y) >= 0) { // No walls within x velocity distance
+            this.pos.y += this.direction.y;
+        } else {
+            // Get remaining distance to wall 
+            let remainderToWallY = (this.pos.y + this.direction.y >= bounds.y) ? bounds.y - this.pos.y : -this.pos.y;
+            this.pos.y += remainderToWallY;
+            //console.log("remainder to wall: %i ", remainderToWall)
+            this.direction.y *= -1; // You are now at a wall, change direction
+            let distanceLeftY = this.direction.y + remainderToWallY; // Get remaining distance left on move
+            //console.log("Distance left: %i", distanceLeft)
+            this.pos.y += distanceLeftY;
+        }
+
+    }
 }
