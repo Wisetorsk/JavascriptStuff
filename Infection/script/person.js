@@ -4,6 +4,7 @@ class Person {
             Age, time since last infection, number of people infected and state and type of infection
             */
     ticksOld = 0;
+    age = 0;
     ticksSinceInfection = 0;
     asymptomatic = false;
     recovered = false;
@@ -69,5 +70,14 @@ class Person {
             this.pos.y += distanceLeftY;
         }
 
+    }
+
+    updateAge() {
+        this.age = Math.floor(this.ticksOld / Enviroment.ticksPerYear); // Integer division
+    }
+
+    die() {
+        // Calculate the age of this person based of ticks
+        // If Math.random() <= Virus.mortalityFunction(this.age)
     }
 }

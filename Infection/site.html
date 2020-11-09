@@ -16,8 +16,8 @@
 
     </div>
     <!-- Controller script (move to file) -->
-    <script type="text/babel">
-        let virus = new Virus(); // Virus with default params
+    <script type="text/babel"> //src="script/main.js"
+            let virus = new Virus(); // Virus with default params
         let env = new Enviroment(virus);
         env.people.forEach(i => Math.random() < 0.1 ? i.infected = true :i.infected = false )
 
@@ -81,7 +81,6 @@
         }
 
         update();
-
-    </script>
+</script>
 </body>
 </html>
