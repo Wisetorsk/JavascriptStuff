@@ -34,12 +34,14 @@ class Person {
     infectOther(person, virus) {
         /* Given that person is within range (decided by Enviroment in advance) Takes a person object and a virus object and runs infection function based on virus parameters. If the infection is successful, increment this.peopleInfected */
         this.contacts++; // Increment contact counter.
+        if (this.ticksSinceInfection >= virus.avgIncubation) { // See if this person if currently infectious. 
         let infectionChance = this.asymptomatic ? virus.asymptomaticR : virus.symptomaticR // Gets the infection chance of the virus based on if this person is asymptomatic or symptomatic carrier.
-        if (infectionChance >= Math.random()) {
-            if(person.infect()) { // Try to infect 
-                // If infection succeeds, increment the number of people infected by this person.
-                this.peopleInfected++;
-            } 
+            if (infectionChance >= Math.random()) { // See if this person will infect the other
+                if(person.infect()) { // Infect other person
+                    // If the person is not immune, the infection succeeds, increment the number of people infected by this person.
+                    this.peopleInfected++;
+                } 
+            }
         }
     }
 

@@ -1,0 +1,17 @@
+.parent {
+    height:900px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    }
+
+.testing > div{
+    outline: 1px black solid;
+}
+
+.testing > div:hover {
+    background-color: rgba(170, 223, 250, 0.5);
+}
