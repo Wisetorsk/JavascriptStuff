@@ -15,3 +15,7 @@
 .testing > div:hover {
     background-color: rgba(170, 223, 250, 0.5);
 }
+
+.canvas {
+    outline: 2px dashed green;
+}

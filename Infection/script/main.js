@@ -1,24 +1,20 @@
-let virus = new Virus(); // Virus with default params
-let env = new Enviroment(virus);
-env.people.forEach(i => Math.random() < 0.1 ? i.infected = true :i.infected = false )
-
-// Do something repeating and call env.oneCycle()
-
-
-//testing
-let a = new Person();
-let b = new Person();
-a.asymptomatic = true;
-let tries = 1;
-while(1) {
-    a.infectOther(b, virus);
-    if (a.peopleInfected > 0) {
-        break;
-    } else {
-        tries++;
-    }
+const defaultParams = {
+    symptomaticR:.25,                   // Chance that a symptomatic person will infect another
+    asymptomaticR:.10,                  // Chance that a asymptomatic carrier will infect another
+    infectiveRadius:30,                 // Radius around a person where they can infect another
+    mortality:0.04,                     // Base probability of death
+    avgIncubation:14,                   // Number of days (ticks) until the person becomes infectious
+    asymptomaticChance:0.5,
+    asymptomaticMortalityFactor:0.3    
 }
-console.log("infected after %i attempts", tries);
+
+let virus = new Virus(defaultParams); // Virus with default params
+let env = new Enviroment("canvas", virus);
+numberToInfect = Math.floor(Math.random()*20)
+env.setStartingInfected(numberToInfect);
+//env.people.forEach(i => Math.random() < 0.05 ? i.infect() : i.infected = false )
+env.oneCycle();
+
 
 
 // MoveTest
@@ -41,24 +37,3 @@ closeRight.move(bounds);
 console.log("moved to %i ", closeRight.pos.x);
 */
 
-
-class OutputField extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return (<div>
-            <h1>Results</h1>
-            <div>Active people {this.props.enviroment.people.length}</div>
-            <div>Active infections {this.props.enviroment.people.filter(i => i.infected).length}</div>
-            </div>
-        );
-    }
-}
-
-function update() {
-    ReactDOM.render(<OutputField enviroment={env}/>, document.getElementById("reactContainer"))
-}
-
-update();

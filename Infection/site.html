@@ -12,34 +12,28 @@
     <script src="script/enviroment.js"></script>
     <script src="script/person.js"></script>
     <script src="script/virus.js"></script>
+    <script src="script/display.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css">
     
     <div id="mainContainer" class="grid parent testing">
         <div id="header" class="header">Infetcion simulation</div>
         <div class="empty"></div>
-        <div id="canvasWindow" class="canvas"></div>
+        <div id="canvasWindow">
+            <canvas class="canvas" id="canvas"></canvas>
+        </div>
         <div id="reactContainer" class="outputWindow"></div>
-        <div class="empty"></div>
+        <div id="" class="empty"></div>
         <div class="empty"></div>
     </div>
 
 
 
-
+    <script src="script/main.js" type="text/javascript"></script>
     <!-- Controller script (move to file) -->
-    <script type="text/babel"> //src="script/main.js"
-        let virus = new Virus(); // Virus with default params
-        let env = new Enviroment(virus);
-        env.people.forEach(i => Math.random() < 0.1 ? i.infected = true :i.infected = false )
+    
+    <script type="text/babel"> //src="script/main.js" (module???)
 
         // Do something repeating and call env.oneCycle()
-
-
-        //testing
-        let a = new Person();
-        let b = new Person();
-        a.asymptomatic = true;
-
         class OutputField extends React.Component {
             constructor(props) {
                 super(props)
@@ -47,19 +41,26 @@
 
             render() {
                 return (<div>
-                    <h1>Results</h1>
+                    <h1>{this.props.header}</h1>
                     <div>Active people {this.props.enviroment.people.length}</div>
                     <div>Active infections {this.props.enviroment.people.filter(i => i.infected).length}</div>
+                    <div>Time {this.props.enviroment.time}</div>
                     </div>
                 );
             }
         }
-        
+
+        OutputField.defaultProps = {
+            header: 'Infection'
+        };
+
         function update() {
             ReactDOM.render(<OutputField enviroment={env}/>, document.getElementById("reactContainer"))
         }
 
         update();
+
+       
 </script>
 </body>
 </html>

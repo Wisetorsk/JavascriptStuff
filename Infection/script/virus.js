@@ -1,23 +1,19 @@
-class Virus {;
-    constructor(
-        symptomaticR=.25,                   // Chance that a symptomatic person will infect another
-        asymptomaticR=.10,                  // Chance that a asymptomatic carrier will infect another
-        infectiveRadius=10,                 // Radius around a person where they can infect another
-        mortality=0.04,                     // Base probability of death
-        avgIncubation=14,                   // Number of days (ticks) until the person becomes infectious
-        asymptomaticChance=0.5,
-        asymptomaticMortalityFactor=0.3
-        ) {
-        this.asymptomaticR = asymptomaticR;
-        this.symptomaticR = symptomaticR;
-        this.infectiveRadius = infectiveRadius;
-        this.baseMortalityRate = mortality; 
-        this.asymptomaticMortalityFactor = asymptomaticMortalityFactor;
-        this.asymptomaticChance = asymptomaticChance; // The chance that the person will be asymptomatic.
+class Virus {
+    constructor(params) {
+        /* --PARAMETERS IN PARAMS OBJECT--
+        asymptomaticR
+        symptomaticR
+        infectiveRadius
+        mortality
+        asymptomaticMortalityFactor
+        avgIncubation;
+        asymptomaticChance; // The chance that the person will be asymptomatic.
+
         // replace with Mortality(age) = alpha*e**(beta*age) + lambda 
         // Meantime use either a simple exponential function or even linear component. 
         // (https://en.wikipedia.org/wiki/Gompertz%E2%80%93Makeham_law_of_mortality)
-        this.avgIncubation = avgIncubation;
+        */
+       this.params = params;
     }
 
     mortalityFunction(age, crossover=65, asymptomatic=false) {
@@ -35,7 +31,7 @@ class Virus {;
         }
 
         if (asymptomatic) {
-            chance *= this.asymptomaticMortalityFactor;
+            chance *= this.params.asymptomaticMortalityFactor;
         }
 
         return chance;
